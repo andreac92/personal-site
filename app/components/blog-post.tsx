@@ -16,15 +16,17 @@ export default async function BlogPost({ slug }: BlogPostProps) {
     : undefined;
 
   return (
-    <>
+    <article>
       <div className="flex flex-col items-center">
         {mediaRes && (
-          <Image
-            alt={mediaRes.alt_text}
-            src={mediaRes.source_url}
-            width={500}
-            height={500}
-          />
+          <figure>
+            <Image
+              alt={mediaRes.alt_text}
+              src={mediaRes.source_url}
+              width={500}
+              height={500}
+            />
+          </figure>
         )}
         <div
           className="py-2 text-plum text-2xl font-semibold"
@@ -48,6 +50,6 @@ export default async function BlogPost({ slug }: BlogPostProps) {
       <div className="flex items-center gap-x-2 pt-4">
         <BackButton />
       </div>
-    </>
+    </article>
   );
 }

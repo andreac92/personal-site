@@ -6,6 +6,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import cx from "classnames";
 import "./globals.css";
+import ScrollToTopButton from "./components/scroll-to-top-button";
 
 export const metadata: Metadata = {
   title: "andrea campos | personal site",
@@ -52,6 +53,7 @@ export default function RootLayout({
           </div>
         </header>
         <main className="py-8 w-[800px] mx-auto">{children}</main>
+        <ScrollToTopButton />
       </body>
     </html>
   );

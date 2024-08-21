@@ -2,6 +2,7 @@ import Image from "next/image";
 import mePic from "./meivypic.jpg";
 import ThreePIcon from "@mui/icons-material/ThreeP";
 import Divider from "../components/divider";
+import DownloadResume from "../components/download-resume";
 
 export default function About() {
   return (
@@ -17,12 +18,14 @@ export default function About() {
         </div>
         <div>
           Hi! My name is Andrea. I am a software engineer that loves to work on
-          the web, with specialization in recent years in front-end development.
-          I am based in the Bay Area, where I was born and raised. In my free
-          time I like to hang out with my Chihuahua named Ivy, crochet, read and
-          attend live shows.
+          the web, with specialization in front-end development. I am based in
+          the Bay Area, where I was born and raised. In my free time I like to
+          hang out with my Chihuahua named Ivy, crochet, and attend live shows.
         </div>
         <Divider />
+        <div className="flex justify-center gap-x-2">
+          <DownloadResume />
+        </div>
       </div>
     </section>
   );

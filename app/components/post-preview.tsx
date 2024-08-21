@@ -10,7 +10,7 @@ type PostPreviewProps = {
 export default async function PostPreview({ post }: PostPreviewProps) {
   const postURL = `/blog/${post.slug}`;
   return (
-    <div className="py-6">
+    <article className="py-6">
       <div className="flex gap-x-2">
         <div className="min-w-[125px]">
           <div className="mb-2">
@@ -37,6 +37,6 @@ export default async function PostPreview({ post }: PostPreviewProps) {
           </Link>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
