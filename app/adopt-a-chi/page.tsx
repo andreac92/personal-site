@@ -1,3 +1,3 @@
 export default function AdoptAChi() {
-  return <main className="">adopt a chi</main>;
+  return <section className="">adopt a chi</section>;
 }

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Sedan } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import cx from "classnames";
 import "./globals.css";
 
@@ -9,6 +12,11 @@ export const metadata: Metadata = {
 };
 
 const nameFont = Sedan({ weight: "400", subsets: ["latin"], style: "italic" });
+const mainFont = Montserrat({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  style: ["italic", "normal"],
+});
 
 export default function RootLayout({
   children,
@@ -17,19 +25,29 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={"px-12"}>
+      <body className={cx(mainFont.className, "font-normal px-12")}>
         <header className="py-4">
           <div className="flex justify-between items-center">
-            <div className={cx(nameFont.className, "text-4xl italic")}>
-              <Link href="/">andrea campos</Link>
-            </div>
-            <nav className="flex gap-x-4">
-              <Link href="/about" className="text-fuchsia-900">
-                about
-              </Link>
-              <Link href="/adopt-a-chi" className="text-fuchsia-900">
+            <Link
+              className={cx(nameFont.className, "text-4xl italic text-violet")}
+              href="/"
+            >
+              andrea campos
+            </Link>
+            <nav className="flex gap-x-4 text-violet">
+              <Link href="/about">about</Link>
+              {/* <Link href="/adopt-a-chi">
                 adopt a chi
-              </Link>
+              </Link> */}
+              <div>|</div>
+              <div className="flex gap-x-2">
+                <Link href="https://github.com/andreac92">
+                  <GitHubIcon />
+                </Link>
+                <Link href="https://www.linkedin.com/in/andc92/">
+                  <LinkedInIcon />
+                </Link>
+              </div>
             </nav>
           </div>
         </header>

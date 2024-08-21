@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply bg-main-bg text-text;
+}
+
+main a {
+  @apply text-magenta font-medium;
+}
+
+a:hover {
+  @apply text-plum;
+}
+
 .blog-content p {
   margin-bottom: 25px;
+}
+
+strong {
+  @apply text-plum;
 }

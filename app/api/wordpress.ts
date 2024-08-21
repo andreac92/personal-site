@@ -9,15 +9,21 @@ const WPClient = new WPAPI({
 type GetWPPostOptions = {
   perPage?: number;
   page?: number;
+  categoryID?: number;
 };
 
 export const getWPPosts = ({
   perPage = 5,
   page = 1,
+  categoryID,
 }: GetWPPostOptions = {}) => {
-  return WPClient.posts()
-    .perPage(perPage)
-    .page(page)
+  let req = WPClient.posts().perPage(perPage).page(page);
+
+  if (categoryID) {
+    req.param("categories", categoryID);
+  }
+
+  return req
     .get()
     .then((data) => {
       return data;
