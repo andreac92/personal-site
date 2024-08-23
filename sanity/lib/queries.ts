@@ -15,6 +15,7 @@ const postFields = groq`
   date,
   content,
   "featuredMedia": featuredMedia.asset->{title, url},
+  featuredMediaAlt,
   "slug": slug.current,
   "categories": categories[]->{name, "slug": slug.current, _id}
 `;

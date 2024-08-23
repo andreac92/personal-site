@@ -18,7 +18,7 @@ export default async function BlogPost({ slug }: BlogPostProps) {
         {post.featuredMedia && (
           <figure>
             <Image
-              alt={post.featuredMedia.title}
+              alt={post.featuredMediaAlt}
               src={post.featuredMedia.url}
               width={500}
               height={500}

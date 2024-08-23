@@ -12,22 +12,6 @@ export const postType = defineType({
     defineField({ name: "date", type: "datetime" }),
     defineField({ name: "modified", type: "datetime" }),
     defineField({
-      name: "status",
-      type: "string",
-      options: {
-        list: [
-          { title: "Published", value: "publish" },
-          { title: "Future", value: "future" },
-          { title: "Draft", value: "draft" },
-          { title: "Pending", value: "pending" },
-          { title: "Private", value: "private" },
-          { title: "Trash", value: "trash" },
-          { title: "Auto-Draft", value: "auto-draft" },
-          { title: "Inherit", value: "inherit" },
-        ],
-      },
-    }),
-    defineField({
       name: "content",
       type: "portableText",
     }),
@@ -36,6 +20,7 @@ export const postType = defineType({
       type: "portableText",
     }),
     defineField({ name: "featuredMedia", type: "image" }),
+    defineField({ name: "featuredMediaAlt", type: "string" }),
     defineField({ name: "sticky", type: "boolean" }),
     defineField({
       name: "author",
