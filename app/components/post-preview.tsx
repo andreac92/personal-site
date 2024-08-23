@@ -3,6 +3,7 @@ import { Post } from "../types";
 import dayjs from "dayjs";
 import PostCategories from "./post-categories";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { PortableText } from "next-sanity";
 
 type PostPreviewProps = {
   post: Post;
@@ -27,7 +28,9 @@ export default async function PostPreview({ post }: PostPreviewProps) {
           <Link className="text-lg font-semibold" href={postURL}>
             <div>{post.title}</div>
           </Link>
-          <div className="text-sm">{post.excerpt}</div>
+          <div className="text-sm">
+            <PortableText value={post.excerpt} />
+          </div>
           <Link className="text-sm flex items-center gap-x-2" href={postURL}>
             <div>read more</div>
             <ArrowRightAltIcon />

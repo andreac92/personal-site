@@ -5,7 +5,7 @@ export type Post = {
   date: string;
   slug: string;
   title: string;
-  excerpt: string;
+  excerpt: any;
   categories: Categories;
 };
 

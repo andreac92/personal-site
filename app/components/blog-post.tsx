@@ -1,4 +1,4 @@
-import { PortableText, type PortableTextReactComponents } from "next-sanity";
+import { PortableText } from "next-sanity";
 import BackButton from "@/app/components/back-button";
 import dayjs from "dayjs";
 import Image from "next/image";
