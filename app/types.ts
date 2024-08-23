@@ -1,10 +1,12 @@
+export type Categories = { name: string; _id: string; slug: string }[];
+
 export type Post = {
-  id: string;
+  _id: string;
   date: string;
   slug: string;
-  title: { rendered: string };
-  excerpt: { rendered: string };
-  categories: Array<number>;
+  title: string;
+  excerpt: string;
+  categories: Categories;
 };
 
 export type SearchParams = { [key: string]: string | string[] | undefined };

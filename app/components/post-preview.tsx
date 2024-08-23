@@ -25,12 +25,9 @@ export default async function PostPreview({ post }: PostPreviewProps) {
 
         <div>
           <Link className="text-lg font-semibold" href={postURL}>
-            <div dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+            <div>{post.title}</div>
           </Link>
-          <div
-            className="text-sm"
-            dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-          />
+          <div className="text-sm">{post.excerpt}</div>
           <Link className="text-sm flex items-center gap-x-2" href={postURL}>
             <div>read more</div>
             <ArrowRightAltIcon />

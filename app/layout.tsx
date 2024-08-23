@@ -42,10 +42,13 @@ export default function RootLayout({
               </Link> */}
               <div>|</div>
               <div className="flex gap-x-2">
-                <Link href="https://github.com/andreac92">
+                <Link href="https://github.com/andreac92" target="_blank">
                   <GitHubIcon />
                 </Link>
-                <Link href="https://www.linkedin.com/in/andc92/">
+                <Link
+                  href="https://www.linkedin.com/in/andc92/"
+                  target="_blank"
+                >
                   <LinkedInIcon />
                 </Link>
               </div>

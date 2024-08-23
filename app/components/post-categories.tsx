@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { categoryMap } from "../constants";
 import cx from "classnames";
+import { Categories } from "../types";
 
 type PostCategoriesProps = {
-  categories: Array<number>;
+  categories: Categories;
   layout?: "vertical" | "horizontal";
 };
 
@@ -18,14 +19,14 @@ const PostCategories = ({
         "gap-x-2": layout === "horizontal",
       })}
     >
-      {categories.map((categoryID) => {
+      {categories.map((category) => {
         return (
           <Link
-            key={`category-${categoryID}`}
+            key={`category-${category._id}`}
             className="text-xs w-fit border border-magenta rounded px-2 py-1 hover:border-plum"
-            href={`/blog/category/${categoryID}`}
+            href={`/blog/category/${category.slug}`}
           >
-            {categoryMap[categoryID]}
+            {category.name}
           </Link>
         );
       })}

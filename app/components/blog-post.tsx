@@ -1,45 +1,40 @@
-import { getWPMediaById, getWPPostBySlug } from "@/app/api/wordpress";
+import { PortableText, type PortableTextReactComponents } from "next-sanity";
 import BackButton from "@/app/components/back-button";
 import dayjs from "dayjs";
 import Image from "next/image";
 import PostCategories from "./post-categories";
 import Divider from "./divider";
+import { getPostBySlug } from "../api/sanity";
 
 type BlogPostProps = {
   slug: string;
 };
 export default async function BlogPost({ slug }: BlogPostProps) {
-  const postRes = await getWPPostBySlug({ slug });
-  const post = postRes[0];
-  const mediaRes = post.featured_media
-    ? await getWPMediaById({ id: post.featured_media })
-    : undefined;
-
-  return (
+  const postRes = await getPostBySlug({ slug });
+  const post = postRes?.[0];
+  return post ? (
     <article>
       <div className="flex flex-col items-center">
-        {mediaRes && (
+        {post.featuredMedia && (
           <figure>
             <Image
-              alt={mediaRes.alt_text}
-              src={mediaRes.source_url}
+              alt={post.featuredMedia.title}
+              src={post.featuredMedia.url}
               width={500}
               height={500}
             />
           </figure>
         )}
-        <div
-          className="py-2 text-plum text-2xl font-semibold"
-          dangerouslySetInnerHTML={{ __html: post.title.rendered }}
-        />
+        <div className="py-2 text-plum text-2xl font-semibold">
+          {post.title}
+        </div>
         <div>{dayjs(post.date).format("MM/DD/YYYY")}</div>
         <Divider />
       </div>
 
-      <div
-        className="blog-content pt-4"
-        dangerouslySetInnerHTML={{ __html: post.content.rendered }}
-      />
+      <div className="blog-content pt-4">
+        <PortableText value={post.content} />
+      </div>
       <div className="flex gap-x-2 items-center">
         <div className="text-xs font-medium">Categories: </div>
         <PostCategories categories={post.categories} layout="horizontal" />
@@ -51,5 +46,7 @@ export default async function BlogPost({ slug }: BlogPostProps) {
         <BackButton />
       </div>
     </article>
+  ) : (
+    <div>Could not load post</div>
   );
 }

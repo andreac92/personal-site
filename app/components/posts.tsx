@@ -1,17 +1,20 @@
-import Link from "next/link";
-import { getWPPosts } from "../api/wordpress";
 import { Post, SearchParams } from "../types";
 import PostPreview from "./post-preview";
 import Divider from "./divider";
+import { getPreviewPosts } from "../api/sanity";
+import dayjs from "dayjs";
+import PostPreviewPagination from "./post-preview-pagination";
 
 type PostsProps = {
-  categoryID?: number;
+  category?: string;
   searchParams: SearchParams;
 };
 
-export default async function Posts({ categoryID, searchParams }: PostsProps) {
-  const page = searchParams.page ? Number(searchParams.page) : 1;
-  const posts = await getWPPosts({ categoryID, page });
+export default async function Posts({ category, searchParams }: PostsProps) {
+  const lastDate = searchParams.cursor
+    ? Buffer.from(searchParams.cursor as string, "base64").toString("ascii")
+    : dayjs().toISOString();
+  const posts = await getPreviewPosts({ category, lastDate });
 
   return (
     <>
@@ -21,14 +24,11 @@ export default async function Posts({ categoryID, searchParams }: PostsProps) {
             <PostPreview key={`post-${i}`} post={post} />
           ))}
           <Divider />
-          <div className="flex gap-x-8 justify-center">
-            {posts._paging?.prev && (
-              <Link href={`?page=${page - 1}`}>prev</Link>
-            )}
-            {posts._paging?.next && (
-              <Link href={`?page=${page + 1}`}>next</Link>
-            )}
-          </div>
+          <PostPreviewPagination
+            lastDate={posts[posts.length - 1]?.date}
+            category={category}
+            isFirstPage={!searchParams.cursor}
+          />
         </>
       ) : (
         <div>Could not load posts</div>
