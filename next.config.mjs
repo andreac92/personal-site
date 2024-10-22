@@ -5,9 +5,9 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "andrea-campos.com",
+        hostname: "cdn.rescuegroups.org",
         port: "",
-        pathname: "/wp-content/uploads/**",
+        pathname: "/**",
       },
     ],
   },

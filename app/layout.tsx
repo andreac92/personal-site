@@ -37,9 +37,7 @@ export default function RootLayout({
             </Link>
             <nav className="flex gap-x-4 text-violet">
               <Link href="/about">about</Link>
-              {/* <Link href="/adopt-a-chi">
-                adopt a chi
-              </Link> */}
+              <Link href="/adopt-a-chi">adopt a chi</Link>
               <div>|</div>
               <div className="flex gap-x-2">
                 <Link href="https://github.com/andreac92" target="_blank">
@@ -55,7 +53,7 @@ export default function RootLayout({
             </nav>
           </div>
         </header>
-        <main className="py-8 w-[800px] mx-auto">{children}</main>
+        <main className="py-8">{children}</main>
         <ScrollToTopButton />
       </body>
     </html>

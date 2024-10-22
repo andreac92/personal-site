@@ -10,3 +10,21 @@ export type Post = {
 };
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
+
+export type ChiData = {
+  id: string;
+  attributes: {
+    distance: number;
+    name: string;
+    ageGroup: string;
+    sex: string;
+    pictureThumbnailUrl: string;
+  };
+  relationships: {
+    pictures?: { data: Array<{ id: string }> };
+  };
+};
+
+export type ChiPaginationData = {
+  pages: number;
+};

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import mePic from "./meivypic.jpg";
 import ThreePIcon from "@mui/icons-material/ThreeP";
-import Divider from "../components/divider";
-import DownloadResume from "../components/download-resume";
+import Divider from "../../components/divider";
+import DownloadResume from "../../components/download-resume";
 
 export default function About() {
   return (
