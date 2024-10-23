@@ -28,6 +28,22 @@ const ChiSidebar = () => {
     }
   }, [isValidZipcode, zipcode]);
 
+  useEffect(() => {
+    const filters = updateChiSearchParams(searchParams, {
+      age: age === "All" ? "" : age,
+      page: "", // reset page num
+    });
+    router.push(`/adopt-a-chi?${toURLParams(filters)}`);
+  }, [age]);
+
+  useEffect(() => {
+    const filters = updateChiSearchParams(searchParams, {
+      sex: sex === "All" ? "" : sex,
+      page: "", // reset page num
+    });
+    router.push(`/adopt-a-chi?${toURLParams(filters)}`);
+  }, [sex]);
+
   return (
     <div className="p-2 flex flex-col items-center">
       <div className="py-2 text-plum text-2xl font-semibold text-center">
@@ -62,6 +78,7 @@ const ChiSidebar = () => {
           <MenuItem value="Baby">Baby</MenuItem>
           <MenuItem value="Young">Young</MenuItem>
           <MenuItem value="Adult">Adult</MenuItem>
+          <MenuItem value="Senior">Senior</MenuItem>
         </Select>
       </FormControl>
       <FormControl variant="outlined">

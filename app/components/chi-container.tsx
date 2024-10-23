@@ -11,7 +11,9 @@ type ChiContainerProps = {
 const ChiContainer = async ({ searchParams }: ChiContainerProps) => {
   const page = searchParams.page ? Number(searchParams.page) : 1;
   const zipcode = (searchParams.zip ? searchParams.zip : "94706") as string;
-  const results = await getAllChis({ page, zipcode, limit: 8 });
+  const age = searchParams.age as string;
+  const sex = searchParams.sex as string;
+  const results = await getAllChis({ page, zipcode, age, sex, limit: 8 });
   const chiArray = results?.data;
 
   return chiArray?.length ? (

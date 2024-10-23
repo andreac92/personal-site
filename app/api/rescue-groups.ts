@@ -25,12 +25,16 @@ type GetAllChisOptions = {
   limit?: number;
   zipcode: string;
   miles?: number;
+  sex?: string;
+  age?: string;
 };
 export const getAllChis = ({
   page = 1,
   limit = 5,
   miles = 25,
   zipcode,
+  sex,
+  age,
 }: GetAllChisOptions) => {
   const bodyData = {
     filterRadius: {
@@ -43,6 +47,24 @@ export const getAllChis = ({
         operation: "contains",
         criteria: "chihuahua",
       },
+      ...(age
+        ? [
+            {
+              fieldName: "animals.ageGroup",
+              operation: "equal",
+              criteria: age,
+            },
+          ]
+        : []),
+      ...(sex
+        ? [
+            {
+              fieldName: "animals.sex",
+              operation: "equal",
+              criteria: sex,
+            },
+          ]
+        : []),
     ],
   };
   return rescueGroupFetch({
