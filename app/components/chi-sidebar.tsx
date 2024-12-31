@@ -63,6 +63,7 @@ const ChiSidebar = () => {
             const filters = createQueryString("zip", zip);
             router.push(`/adopt-a-chi?${filters}`);
           }
+          setZipcode(zip);
         }}
         helperText={!isValidZipcode ? "Enter a valid zipcode" : ""}
       />

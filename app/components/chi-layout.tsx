@@ -10,7 +10,7 @@ const ChiLayout = ({ children }: any) => {
   const isChiProfile = pathname.startsWith("/adopt-a-chi/chi/");
   return (
     <section
-      className={cx("flex", {
+      className={cx("flex flex-wrap md:flex-nowrap", {
         "gap-x-4": !isChiProfile,
         "flex-col gap-y-4": isChiProfile,
       })}
@@ -18,13 +18,13 @@ const ChiLayout = ({ children }: any) => {
       {isChiProfile ? (
         <BackButton />
       ) : (
-        <div className="w-4/12 max-w-[545px] bg-white/50">
+        <div className="w-full md:max-w-[400px] bg-white/50">
           <ChiSidebar />
         </div>
       )}
       <div
         className={cx("max-w-[1000px] bg-white/50 self-center", {
-          "w-8/12": !isChiProfile,
+          "w-full": !isChiProfile,
           "w-fit": isChiProfile,
         })}
       >

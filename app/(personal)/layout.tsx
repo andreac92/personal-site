@@ -3,7 +3,7 @@ const Layout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return <section className="w-[800px] mx-auto">{children}</section>;
+  return <section className="max-w-[800px] mx-auto">{children}</section>;
 };
 
 export default Layout;

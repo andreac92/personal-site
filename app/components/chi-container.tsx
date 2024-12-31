@@ -18,7 +18,7 @@ const ChiContainer = async ({ searchParams }: ChiContainerProps) => {
 
   return chiArray?.length ? (
     <div>
-      <div className="flex flex-wrap justify-between gap-y-2 p-2">
+      <div className="flex flex-wrap justify-center gap-x-2 gap-y-2 p-2">
         {chiArray.map((chiData: ChiData) => {
           return (
             <Chi
