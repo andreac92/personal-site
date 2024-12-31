@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import ChiLayout from "../components/chi-layout";
 
 export default function AdoptAChiLayout({ children }) {
-  return <ChiLayout>{children}</ChiLayout>;
+  return (
+    <Suspense>
+      <ChiLayout>{children}</ChiLayout>
+    </Suspense>
+  );
 }
