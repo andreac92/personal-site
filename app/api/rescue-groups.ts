@@ -80,3 +80,19 @@ export const getAllChis = ({
     })
     .catch((error) => ({ error }));
 };
+
+type GetChiByIdOptions = {
+  id: string;
+};
+
+export const getChiById = ({ id }: GetChiByIdOptions) => {
+  return rescueGroupFetch({ path: `public/animals/${id}`, method: "GET" })
+    .then(async (res) => {
+      if (!res.ok) {
+        throw new Error(`Response status: ${res.status}`);
+      }
+      const json = await res.json();
+      return json;
+    })
+    .catch((error) => ({ error }));
+};

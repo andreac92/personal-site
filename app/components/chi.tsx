@@ -23,10 +23,7 @@ const Chi = ({ data, associatedData }: ChiProps) => {
       className="border border-magenta border-4 bg-white group"
     >
       <div className="w-[200px] relative">
-        <div className="w-[200px] h-[200px] bg-slate-200 flex items-center justify-center">
-          <PetsIcon fontSize="large" />
-        </div>
-        {/* {pictures ? (
+        {pictures ? (
           <Image
             alt={`Picture of ${name}`}
             src={pictures.attributes.large.url}
@@ -38,7 +35,7 @@ const Chi = ({ data, associatedData }: ChiProps) => {
           <div className="w-[200px] h-[200px] bg-slate-200 flex items-center justify-center">
             <PetsIcon fontSize="large" />
           </div>
-        )} */}
+        )}
         <div className="text-sm pb-2">
           <div className="text-2xl text-white group-hover:text-plum px-2 mb-2 bg-magenta">
             {name}

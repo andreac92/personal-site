@@ -19,3 +19,8 @@ export const updateChiSearchParams = (
 export const toURLParams = (obj: SearchParams) => {
   return new URLSearchParams(obj as Record<string, string>).toString();
 };
+
+export const isValidZipcode = (zipcode: string) => {
+  if (zipcode === "") return true;
+  return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode as string);
+};

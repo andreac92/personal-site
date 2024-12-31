@@ -1,48 +1,48 @@
 "use client";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormControl, InputLabel, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import { useEffect, useMemo, useState } from "react";
-import { toURLParams, updateChiSearchParams } from "../utils/utils";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { isValidZipcode } from "../utils/utils";
 
 const ChiSidebar = () => {
-  const searchParams = useParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
-  const [age, setAge] = useState(searchParams.age || "All");
-  const [sex, setSex] = useState(searchParams.sex || "All");
-  const [zipcode, setZipcode] = useState(searchParams.zip || "");
+  const ageParam = searchParams.get("age");
+  const sexParam = searchParams.get("sex");
+  const zipParam = searchParams.get("zip");
 
-  const isValidZipcode = useMemo(() => {
-    if (zipcode === "") return true;
-    return /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode as string);
-  }, [zipcode]);
+  const [age, setAge] = useState(ageParam || "All");
+  const [sex, setSex] = useState(sexParam || "All");
+  const [zipcode, setZipcode] = useState(zipParam || "");
 
-  useEffect(() => {
-    if (isValidZipcode) {
-      const filters = updateChiSearchParams(searchParams, {
-        zip: zipcode,
-        page: "", // reset page num
-      });
-      router.push(`/adopt-a-chi?${toURLParams(filters)}`);
-    }
-  }, [isValidZipcode, zipcode]);
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (!value) {
+        params.delete(name);
+      } else {
+        params.set(name, value);
+      }
 
-  useEffect(() => {
-    const filters = updateChiSearchParams(searchParams, {
-      age: age === "All" ? "" : age,
-      page: "", // reset page num
-    });
-    router.push(`/adopt-a-chi?${toURLParams(filters)}`);
-  }, [age]);
+      params.delete("page");
+      return params.toString();
+    },
+    [searchParams]
+  );
 
   useEffect(() => {
-    const filters = updateChiSearchParams(searchParams, {
-      sex: sex === "All" ? "" : sex,
-      page: "", // reset page num
-    });
-    router.push(`/adopt-a-chi?${toURLParams(filters)}`);
-  }, [sex]);
+    setAge(ageParam || "All");
+  }, [ageParam]);
+
+  useEffect(() => {
+    setSex(sexParam || "All");
+  }, [sexParam]);
+
+  useEffect(() => {
+    setZipcode(zipParam || "");
+  }, [zipParam]);
 
   return (
     <div className="p-2 flex flex-col items-center">
@@ -55,10 +55,14 @@ const ChiSidebar = () => {
       </div>
       <TextField
         label="Zip Code"
-        error={!isValidZipcode}
+        error={!isValidZipcode(zipcode)}
         value={zipcode}
         onChange={(e) => {
-          setZipcode(e.target.value);
+          const zip = e.target.value;
+          if (isValidZipcode(zip)) {
+            const filters = createQueryString("zip", zip);
+            router.push(`/adopt-a-chi?${filters}`);
+          }
         }}
         helperText={!isValidZipcode ? "Enter a valid zipcode" : ""}
       />
@@ -71,7 +75,9 @@ const ChiSidebar = () => {
           labelId="age-filter"
           value={age}
           onChange={(e) => {
-            setAge(e.target.value);
+            const age = e.target.value;
+            const filters = createQueryString("age", age === "All" ? "" : age);
+            router.push(`/adopt-a-chi?${filters}`);
           }}
         >
           <MenuItem value="All">All</MenuItem>
@@ -88,7 +94,9 @@ const ChiSidebar = () => {
           label="Sex"
           value={sex}
           onChange={(e) => {
-            setSex(e.target.value);
+            const sex = e.target.value;
+            const filters = createQueryString("sex", sex === "All" ? "" : sex);
+            router.push(`/adopt-a-chi?${filters}`);
           }}
         >
           <MenuItem value="All">All</MenuItem>
