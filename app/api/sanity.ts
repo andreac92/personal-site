@@ -24,7 +24,10 @@ export const getPreviewPosts = async ({
     params: { page: perPage, lastDate, category },
   })
     .then((res) => res)
-    .catch((error) => ({ error }));
+    .catch((error) => {
+      console.log("[SANITY API ERROR]", error);
+      return { error };
+    });
 };
 
 type GetPostBySlugOptions = {
@@ -37,7 +40,10 @@ export const getPostBySlug = async ({ slug }: GetPostBySlugOptions) => {
     params: { slug },
   })
     .then((res) => res)
-    .catch((error) => ({ error }));
+    .catch((error) => {
+      console.log("[SANITY API ERROR]", error);
+      return { error };
+    });
 };
 
 type HasNextPreviewPostsOptions = {
@@ -55,7 +61,10 @@ export const hasNextPreviewPosts = async ({
     params: { page: perPage, lastDate, category },
   })
     .then((res) => res)
-    .catch((error) => ({ error }));
+    .catch((error) => {
+      console.log("[SANITY API ERROR]", error);
+      return { error };
+    });
 };
 
 type GetCategoryBySlugOptions = {
@@ -67,5 +76,8 @@ export const getCategoryBySlug = async ({ slug }: GetCategoryBySlugOptions) => {
     params: { slug },
   })
     .then((res) => res)
-    .catch((error) => ({ error }));
+    .catch((error) => {
+      console.log("[SANITY API ERROR]", error);
+      return { error };
+    });
 };

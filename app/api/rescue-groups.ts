@@ -17,7 +17,18 @@ const rescueGroupFetch = ({
     ...(bodyData ? { body: JSON.stringify({ data: bodyData }) } : {}),
     next: { revalidate: 3600 },
   };
-  return fetch(`${process.env.RESCUE_GROUP_ENDPOINT}/${path}`, options);
+  return fetch(`${process.env.RESCUE_GROUP_ENDPOINT}/${path}`, options)
+    .then(async (res) => {
+      if (!res.ok) {
+        throw new Error(`Response status: ${res.status}`);
+      }
+      const json = await res.json();
+      return json;
+    })
+    .catch((error) => {
+      console.log("[RESCUE-GROUPS API ERROR]", error);
+      return { error };
+    });
 };
 
 type GetAllChisOptions = {
@@ -70,15 +81,7 @@ export const getAllChis = ({
   return rescueGroupFetch({
     path: `public/animals/search/available/dogs/haspic?page=${page}&limit=${limit}&fields[animals]=distance,name,ageGroup&include=pictures&sort=animals.distance`,
     bodyData,
-  })
-    .then(async (res) => {
-      if (!res.ok) {
-        throw new Error(`Response status: ${res.status}`);
-      }
-      const json = await res.json();
-      return json;
-    })
-    .catch((error) => ({ error }));
+  });
 };
 
 type GetChiByIdOptions = {
@@ -86,13 +89,5 @@ type GetChiByIdOptions = {
 };
 
 export const getChiById = ({ id }: GetChiByIdOptions) => {
-  return rescueGroupFetch({ path: `public/animals/${id}`, method: "GET" })
-    .then(async (res) => {
-      if (!res.ok) {
-        throw new Error(`Response status: ${res.status}`);
-      }
-      const json = await res.json();
-      return json;
-    })
-    .catch((error) => ({ error }));
+  return rescueGroupFetch({ path: `public/animals/${id}`, method: "GET" });
 };
