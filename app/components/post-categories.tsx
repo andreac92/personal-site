@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { categoryMap } from "../constants";
 import cx from "classnames";
 import { Categories } from "../types";
 

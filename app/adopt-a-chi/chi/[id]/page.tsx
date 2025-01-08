@@ -1,7 +1,6 @@
 import { getChiById } from "@/app/api/rescue-groups";
 import Image from "next/image";
 import PetsIcon from "@mui/icons-material/Pets";
-import BackButton from "@/app/components/back-button";
 
 type ChiProfileParams = {
   params: { id: string };
