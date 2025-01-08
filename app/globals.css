@@ -18,6 +18,10 @@ a:hover {
   margin-bottom: 25px;
 }
 
+.blog-excerpt p {
+  margin-bottom: 10px;
+}
+
 strong {
   @apply text-plum;
 }

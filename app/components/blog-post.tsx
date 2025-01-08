@@ -9,6 +9,22 @@ import { getPostBySlug } from "../api/sanity";
 type BlogPostProps = {
   slug: string;
 };
+
+const portableTextComponents = {
+  marks: {
+    link: ({ children, value }: any) => {
+      const rel = !value.href.startsWith("/")
+        ? "noreferrer noopener"
+        : undefined;
+      return (
+        <a href={value.href} rel={rel} target={rel && "_blank"}>
+          {children}
+        </a>
+      );
+    },
+  },
+};
+
 export default async function BlogPost({ slug }: BlogPostProps) {
   const postRes = await getPostBySlug({ slug });
   const post = postRes?.[0];
@@ -33,7 +49,10 @@ export default async function BlogPost({ slug }: BlogPostProps) {
       </div>
 
       <div className="blog-content pt-4">
-        <PortableText value={post.content} />
+        <PortableText
+          value={post.content}
+          components={portableTextComponents}
+        />
       </div>
       <div className="flex gap-x-2 items-center">
         <div className="text-xs font-medium">Categories: </div>

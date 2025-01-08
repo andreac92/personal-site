@@ -8,6 +8,7 @@ import { PortableText } from "next-sanity";
 type PostPreviewProps = {
   post: Post;
 };
+
 export default async function PostPreview({ post }: PostPreviewProps) {
   const postURL = `/blog/${post.slug}`;
   return (
@@ -28,7 +29,7 @@ export default async function PostPreview({ post }: PostPreviewProps) {
           <Link className="text-lg font-semibold" href={postURL}>
             <div>{post.title}</div>
           </Link>
-          <div className="text-sm">
+          <div className="text-sm blog-excerpt">
             <PortableText value={post.excerpt} />
           </div>
           <Link className="text-sm flex items-center gap-x-2" href={postURL}>
